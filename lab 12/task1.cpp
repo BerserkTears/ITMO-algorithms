@@ -1,4 +1,4 @@
-//#include <fstream>
+#include <fstream>
 #include <algorithm>
 #include <iostream>
 #include "vector"
@@ -16,7 +16,7 @@ vector<int> FindLIS(vector<int> &given){
     d[0] = MINF;
     for (int i = 0; i < size; ++i) {
         long j = upper_bound(d.begin(), d.end(), given[i]) - d.begin();
-        if(d[j - 1] < given[i] && given[i] < d[j]){
+        if(d[j - 1] < given[i] && given[i] < d[j] && (d[j - 1] - given[i]) % 2 != 0){
             d[j] = given[i];
             pos[j] = i;
             prev[i] = pos[j - 1];
@@ -34,19 +34,19 @@ vector<int> FindLIS(vector<int> &given){
 }
 
 int main() {
-//    ifstream fin("input.txt");
-//    ofstream fout("output.txt");
+    ifstream fin("input.txt");
+    ofstream fout("output.txt");
     int n;
-    cin >> n;
+    fin >> n;
     vector<int> given(n), answer;
     for (int i = 0; i < n; ++i) {
-        cin >> given[i];
+        fin >> given[i];
     }
     answer = FindLIS(given);
-    cout << answer.size() << endl;
+    fout << answer.size() << endl;
     for (long i = (long)answer.size() - 1; i >= 0; i--) {
-        cout << answer[i] << " ";
+        fout << answer[i] << " ";
     }
-//    fout.close();
+    fout.close();
     return 0;
 }
