@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #define TESTING
 #include "task1.cpp"
+#include "task2.cpp"
 
 
 TEST(given, first){
